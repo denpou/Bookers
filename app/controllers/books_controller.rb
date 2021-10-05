@@ -6,15 +6,22 @@ class BooksController < ApplicationController
 
   def show
       @book = Book.find(params[:id])
+      
  
+  end
+  
+  def new
+    @book = Book.new
   end
 
   def create
       @book = Book.new(book_params)
       if @book.save
-        redirect_to book_path(book.id)
+        redirect_to "/books/#{@book.id}"
+      flash[:notice] = "ブックが正常に作成されました。"
       else
-        render :new
+       @books = Book.all
+       render :new
       end
   end
 
@@ -26,6 +33,7 @@ class BooksController < ApplicationController
       book = Book.find(params[:id])
       book.update(book_params)
       redirect_to book_path(book)
+      flash[:noti] = "ブックが正常に作成されました。"
   end
 
   def destroy
