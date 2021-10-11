@@ -9,6 +9,18 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
+  <% if flash[:notice] %>
+    <div class="flash">
+         <%= flash[:notice] %>
+    </div>
+　<% end %>
+　
+　-if model.errors.any? 
+  .alert
+    %ul
+      -model.errors.full_messages.each do |message| 
+        %li= message
+  
   <body>
     <%= yield %>
   </body>
